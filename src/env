@@ -1,0 +1,5 @@
+# Which shell to use. Blank means that the first shell option found will be used
+#SHELL_BIN=""
+
+# List of shells to check. Use the first available shell. This is only used if SHELL_BIN is not defined
+#SHELL_OPTIONS="bash sh"
