@@ -28,7 +28,7 @@ SHELL_BIN=
 # Load settings file
 SETTINGS_FILE=/etc/c8y-command-plugin/env
 if [ -f "$SETTINGS_FILE" ]; then
-    FOUND_FILE=$(find "$SETTINGS_FILE" -perm 644 | head -1)
+    FOUND_FILE=$(find "$SETTINGS_FILE" -perm 644 | head -n1)
 
     if [ -n "$FOUND_FILE" ]; then
         info "Loading settings: $FOUND_FILE"
