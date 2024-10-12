@@ -4,8 +4,8 @@ platform: linux
 version: ${SEMVER}
 section: misc
 priority: optional
-maintainer: Reuben Miller <reuben.d.miller@gmail.com>
-description: thin-edge.io Cumulocity IoT Shell/Command operation plugin
+maintainer: thin-edge.io <reuben.miller@cumulocity.com>
+description: thin-edge.io Shell/Command operation plugin
 vendor: thin-edge.io
 homepage: https://github.com/reubenmiller/c8y-command-plugin
 license: MIT
@@ -13,15 +13,29 @@ apk:
   # Use noarch instead of "all"
   arch: noarch
 contents:
-  - src: ./src/c8y_Command
-    dst: /etc/tedge/operations/c8y/
+  - src: ./src/v2/c8y_Command.toml
+    dst: /etc/tedge/operations/c8y/c8y_Command
     file_info:
       mode: 0644
       owner: tedge
       group: tedge
 
-  - src: ./src/c8y-command
-    dst: /usr/bin/c8y-command
+  - src: ./src/v2/shell_execute.toml
+    dst: /etc/tedge/operations/
+    file_info:
+      mode: 0644
+      owner: tedge
+      group: tedge
+
+  - src: ./src/v2/shell_execute.sh
+    dst: /usr/bin/shell_execute.sh
+    file_info:
+      mode: 0755
+      owner: tedge
+      group: tedge
+
+  - src: ./src/v2/create_workflow_command.sh
+    dst: /usr/bin/create_workflow_command.sh
     file_info:
       mode: 0755
       owner: tedge
