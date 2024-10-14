@@ -37,10 +37,10 @@ get_device_topic_id() {
 EXTERNAL_ID=$(printf '%s' "$PAYLOAD" | jq -r '.externalSource.externalId // ""')
 TOPIC_ROOT=$(tedge config get mqtt.topic_root)
 DEVICE_TOPIC_ID=$(get_device_topic_id "$EXTERNAL_ID")
-CMD_ID=$(echo "$PAYLOAD" | jq -r '.id')
+CMD_ID=$(printf '%s' "$PAYLOAD"  | jq -r '.id')
 TOPIC="$TOPIC_ROOT/$DEVICE_TOPIC_ID/cmd/shell_execute/c8y-mapper-$CMD_ID"
 
-COMMAND_PAYLOAD=$(echo "$PAYLOAD" | jq -c '{"status":"init", "command": (.c8y_Command.text // "")}')
+COMMAND_PAYLOAD=$(printf '%s' "$PAYLOAD" | jq -c '{"status":"init", "command": (.c8y_Command.text // "")}')
 
 info "Publishing operation (to trigger workflow): $TOPIC $COMMAND_PAYLOAD"
 tedge mqtt pub -q 1 -r "$TOPIC" "$COMMAND_PAYLOAD"
