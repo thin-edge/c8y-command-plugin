@@ -6,7 +6,8 @@ IMAGE := env_var_or_default("IMAGE", "debian-12")
 IMAGE_SRC := env_var_or_default("IMAGE_SRC", "debian-12")
 
 build *ARGS:
-    ./ci/build.sh {{ARGS}}
+    ./ci/build.sh {{ARGS}} -- -f nfpm.c8y-command-plugin.yaml
+    ./ci/build.sh {{ARGS}} -- -f nfpm.tedge-command-plugin.yaml
 
 publish *ARGS:
     ./ci/publish.sh {{ARGS}}
