@@ -2,7 +2,7 @@
 set -e
 
 info() {
-    echo "$(date --iso-8601=seconds 2>/dev/null || date -Iseconds) INFO $*" >&2
+    echo "$(date --iso-8601=seconds 2>/dev/null || date +%Y-%m-%dT%H:%M:%S%z 2>/dev/null ||:) INFO $*" >&2
 }
 
 info "Received message: $*"
