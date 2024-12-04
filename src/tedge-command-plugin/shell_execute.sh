@@ -20,7 +20,7 @@ EXAMPLES
 EOT
 }
 
-# Default values (can be overriden by the settings file)
+# Default values (can be overridden by the settings file)
 SHELL_OPTIONS="bash sh"
 SHELL_BIN=
 
