@@ -81,10 +81,11 @@ info "Using shell: $SHELL_BIN"
 TMP_OUTPUT=$(mktemp)
 
 # shellcheck disable=SC2317
-# cleanup() {
-#     rm -f "$TMP_OUTPUT"
-# }
-# trap cleanup EXIT
+cleanup() {
+    trap - EXIT
+    rm -f "$TMP_OUTPUT"
+}
+trap cleanup EXIT
 
 info "Writing command output to file. path=$TMP_OUTPUT"
 
