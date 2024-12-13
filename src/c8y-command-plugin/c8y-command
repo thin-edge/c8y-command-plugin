@@ -11,7 +11,7 @@ info "Received message: $*"
 COMMAND="${1#*,*,}"
 
 # Check if command is wrapped with quotes, if so then remove them
-# Use a case statement, as it is posix compatiable
+# Use a case statement, as it is posix compatible
 case "$COMMAND" in
   '"'*'"')
     # Remove the first char
@@ -21,7 +21,7 @@ case "$COMMAND" in
     ;;
 esac
 
-# Default values (can be overriden by the settings file)
+# Default values (can be overridden by the settings file)
 SHELL_OPTIONS="bash sh"
 SHELL_BIN=
 

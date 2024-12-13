@@ -4,23 +4,23 @@ platform: linux
 version: ${SEMVER}
 section: misc
 priority: optional
-maintainer: Reuben Miller <reuben.d.miller@gmail.com>
-description: thin-edge.io Cumulocity IoT Shell/Command operation plugin
+maintainer: thin-edge.io <info@thin-edge.io>
+description: thin-edge.io Shell/Command operation plugin
 vendor: thin-edge.io
-homepage: https://github.com/reubenmiller/c8y-command-plugin
+homepage: https://github.com/thin-edge/c8y-command-plugin
 license: MIT
 apk:
   # Use noarch instead of "all"
   arch: noarch
 contents:
-  - src: ./src/c8y_Command
-    dst: /etc/tedge/operations/c8y/
+  - src: ./src/c8y-command-plugin/c8y_Command
+    dst: /etc/tedge/operations/c8y/c8y_Command
     file_info:
       mode: 0644
       owner: tedge
       group: tedge
 
-  - src: ./src/c8y-command
+  - src: ./src/c8y-command-plugin/c8y-command
     dst: /usr/bin/c8y-command
     file_info:
       mode: 0755

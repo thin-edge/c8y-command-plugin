@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=https://nfpm.goreleaser.com/static/schema.json
+---
+name: tedge-command-plugin
+arch: all
+platform: linux
+version: ${SEMVER}
+section: misc
+priority: optional
+maintainer: thin-edge.io <info@thin-edge.io>
+description: thin-edge.io Shell/Command operation plugin
+vendor: thin-edge.io
+homepage: https://github.com/thin-edge/c8y-command-plugin
+license: MIT
+apk:
+  # Use noarch instead of "all"
+  arch: noarch
+depends:
+  - jq
+replaces:
+  - c8y-command-plugin
+provides:
+  - c8y-command-plugin
+
+scripts:
+  preinstall: ./src/packaging/preinst
+
+contents:
+  - src: ./src/tedge-command-plugin/c8y_Command.template
+    dst: /etc/tedge/operations/c8y/c8y_Command.template
+    file_info:
+      mode: 0644
+      owner: tedge
+      group: tedge
+
+  - src: ./src/tedge-command-plugin/shell_execute.toml
+    dst: /etc/tedge/operations/
+    file_info:
+      mode: 0644
+      owner: tedge
+      group: tedge
+
+  - src: ./src/tedge-command-plugin/shell_execute.sh
+    dst: /usr/bin/shell_execute.sh
+    file_info:
+      mode: 0755
+      owner: tedge
+      group: tedge
+
+  - src: ./src/env
+    dst: /etc/c8y-command-plugin/env
+    type: config|noreplace
+    file_info:
+      mode: 0644
+      owner: tedge
+      group: tedge
