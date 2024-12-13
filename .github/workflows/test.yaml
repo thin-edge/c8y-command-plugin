@@ -80,6 +80,11 @@ jobs:
       #
       # Test
       #
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          install: true
+
       - name: Install dependencies
         run: |
           just venv
