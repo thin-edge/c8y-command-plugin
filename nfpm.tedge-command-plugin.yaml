@@ -6,10 +6,10 @@ platform: linux
 version: ${SEMVER}
 section: misc
 priority: optional
-maintainer: thin-edge.io <reuben.miller@cumulocity.com>
+maintainer: thin-edge.io <info@thin-edge.io>
 description: thin-edge.io Shell/Command operation plugin
 vendor: thin-edge.io
-homepage: https://github.com/reubenmiller/c8y-command-plugin
+homepage: https://github.com/thin-edge/c8y-command-plugin
 license: MIT
 apk:
   # Use noarch instead of "all"
