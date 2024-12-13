@@ -20,6 +20,13 @@ Execute command
     Operation Should Be SUCCESSFUL    ${operation}
     Should Be Equal    ${operation.to_json()["c8y_Command"]["result"]}    helloworld\n
 
+Execute command that fails
+    ${operation}=    Cumulocity.Create Operation
+    ...    description=example
+    ...    fragments={"c8y_Command":{"text":"echo foo; exit 1"}}
+
+    Operation Should Be FAILED    ${operation}
+
 *** Keywords ***
 
 Test Setup
