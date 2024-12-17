@@ -26,7 +26,7 @@ The following linux package formats are provided on the releases page and also i
 
 **c8y-command-plugin**
 
-This version is compatible with 
+**Warning:** This version is compatible with thin-edge.io > 1.0.0, but is now deprecated. Please upgrade to thin-edge.io >= 1.4.0 and use the new tedge-command-plugin instead.
 
 |Operating System|Repository link|
 |--|--|
