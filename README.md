@@ -58,7 +58,7 @@ The configuration is managed from the following file, and an example of the cont
 **File**
 
 ```sh
-/etc/c8y-command-plugin/env
+/etc/tedge-command-plugin/env
 ```
 
 **Contents**

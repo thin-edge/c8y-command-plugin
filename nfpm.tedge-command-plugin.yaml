@@ -60,7 +60,7 @@ contents:
       group: tedge
 
   - src: ./src/env
-    dst: /etc/c8y-command-plugin/env
+    dst: /etc/tedge-command-plugin/env
     type: config|noreplace
     file_info:
       mode: 0644
