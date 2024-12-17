@@ -14,12 +14,25 @@ license: MIT
 apk:
   # Use noarch instead of "all"
   arch: noarch
-depends:
-  - jq
+
 replaces:
   - c8y-command-plugin
 provides:
   - c8y-command-plugin
+
+overrides:
+  deb:
+    depends:
+      - jq
+      - tedge (> 1.3.1)
+  rpm:
+    depends:
+      - jq
+      - tedge > 1.3.1
+  apk:
+    # alpine - assume tedge is already installed as containers just have the binary (no apk package)
+    depends:
+      - jq
 
 scripts:
   preinstall: ./src/packaging/preinst
