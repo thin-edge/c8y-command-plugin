@@ -25,7 +25,7 @@ SHELL_OPTIONS="bash sh"
 SHELL_BIN=
 
 # Load settings file
-SETTINGS_FILE=/etc/c8y-command-plugin/env
+SETTINGS_FILE=/etc/tedge-command-plugin/env
 if [ -f "$SETTINGS_FILE" ]; then
     FOUND_FILE=$(find "$SETTINGS_FILE" -perm 644 | head -n1)
 
