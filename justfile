@@ -2,8 +2,6 @@ set positional-arguments
 set dotenv-load
 set export
 
-IMAGE := env_var_or_default("IMAGE", "debian-12")
-
 build *ARGS:
     ./ci/build.sh {{ARGS}} -- -f nfpm.tedge-command-plugin.yaml
 
@@ -18,6 +16,3 @@ venv:
 # Run tests
 test *args='':
   ./.venv/bin/python3 -m robot.run --outputdir output {{args}} tests
-
-build-test: build
-  docker buildx build -t {{IMAGE}} --load -f ./test-images/{{IMAGE}}/Dockerfile .
