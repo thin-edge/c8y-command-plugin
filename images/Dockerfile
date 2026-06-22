@@ -1,4 +1,5 @@
-FROM ghcr.io/thin-edge/tedge-demo-main-systemd:latest
+ARG TEST_IMAGE=ghcr.io/thin-edge/tedge-demo-main-systemd:latest
+FROM ${TEST_IMAGE}
 
 # FIXME: Remove once thin-edge.io 1.4.0 is released
 RUN wget -O - thin-edge.io/install.sh | sh -s -- --channel main
@@ -12,5 +13,5 @@ RUN tedge config unset c8y.proxy.client.host \
     && tedge config unset mqtt.client.host \
     && tedge config unset http.client.host
 
-COPY dist/tedge-command-plugin_*.deb /tmp/
+COPY ./dist/tedge-command-plugin_*.deb /tmp/
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --allow-downgrades -y --no-install-recommends /tmp/*.deb

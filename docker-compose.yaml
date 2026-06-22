@@ -1,0 +1,7 @@
+services:
+  tedge:
+    build:
+      dockerfile: images/Dockerfile
+      args:
+        TEST_IMAGE: ${TEST_IMAGE:-ghcr.io/thin-edge/tedge-demo-main-systemd:latest}
+    privileged: true

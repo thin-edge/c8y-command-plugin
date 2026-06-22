@@ -1,10 +1,8 @@
 *** Settings ***
 Resource    ./resources/common.robot
-Library    Cumulocity
-Library    DeviceLibrary    bootstrap_script=bootstrap.sh
 
-Suite Setup    Test Setup
-Suite Teardown    Collect Logs
+Test Setup       Setup Device
+Test Teardown    Teardown Device
 
 *** Test Cases ***
 
@@ -27,19 +25,10 @@ Execute command that fails
 
     Operation Should Be FAILED    ${operation}
 
-*** Keywords ***
+Execute command works even if the /tmp folder is full
+    Execute Command    cmd=dd if=/dev/zero of=/tmp/example bs=$((64)) count=$((10000*1024)) || true
+    ${operation}=    Cumulocity.Create Operation
+    ...    description=execute command and ignore output
+    ...    fragments={"c8y_Command":{"text":"echo helloworld > /dev/null"}}
 
-Test Setup
-    ${DEVICE_SN}=    Setup
-    Set Suite Variable    $DEVICE_SN
-    Device Should Exist    ${DEVICE_SN}
-
-Collect Logs
-    Get Workflow Logs
-    Get Service Logs
-
-Get Workflow Logs
-    DeviceLibrary.Execute Command    head -n-0 /var/log/tedge/agent/*
-
-Get Service Logs
-    DeviceLibrary.Execute Command    journalctl --no-pager
+    Operation Should Be SUCCESSFUL    ${operation}
