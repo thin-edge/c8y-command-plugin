@@ -33,6 +33,7 @@ packages=(
     deb
     apk
     rpm
+    ipk
 )
 
 for package_type in "${packages[@]}"; do
