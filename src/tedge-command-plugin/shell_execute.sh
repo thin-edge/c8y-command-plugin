@@ -99,8 +99,38 @@ if [ "${EXIT_CODE}" -ne 0 ]; then
     info "Command returned a non-zero exit code. code=$EXIT_CODE"
 fi
 
-echo :::begin-tedge:::
-printf '{"result":%s}\n' "$(jq -R -s '.' < "$TMP_OUTPUT")"
-echo :::end-tedge:::
+if command -V jq >/dev/null 2>&1; then
+    echo :::begin-tedge:::
+    printf '{"result":%s}\n' "$(jq -R -s '.' < "$TMP_OUTPUT")"
+    echo :::end-tedge:::
+elif [ -f /usr/share/libubox/jshn.sh2 ]; then
+    # support OpenWRT
+    # shellcheck disable=SC1091
+    . /usr/share/libubox/jshn.sh
+    json_init
+    json_add_string "result" "$(cat "$TMP_OUTPUT")"
+    json_close_object
+
+    echo :::begin-tedge:::
+    printf '%s\n' "$(json_dump)"
+    echo :::end-tedge:::
+else
+    # fallback to awk
+    echo :::begin-tedge:::
+    printf '{"result":"'
+    awk '
+NR > 1 { printf "\\n" }
+{
+    gsub(/\\/,"\\\\")
+    gsub(/"/,"\\\"")
+    gsub(/\t/,"\\t")
+    gsub(/\r/,"\\r")
+    gsub(/\f/,"\\f")
+    printf "%s", $0
+}
+' "$TMP_OUTPUT"
+    printf '"}\n'
+    echo :::end-tedge:::
+fi
 
 exit "$EXIT_CODE"
