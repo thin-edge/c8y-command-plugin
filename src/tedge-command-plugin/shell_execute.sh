@@ -103,7 +103,7 @@ if command -V jq >/dev/null 2>&1; then
     echo :::begin-tedge:::
     printf '{"result":%s}\n' "$(jq -R -s '.' < "$TMP_OUTPUT")"
     echo :::end-tedge:::
-elif [ -f /usr/share/libubox/jshn.sh2 ]; then
+elif [ -f /usr/share/libubox/jshn.sh ]; then
     # support OpenWRT
     # shellcheck disable=SC1091
     . /usr/share/libubox/jshn.sh
